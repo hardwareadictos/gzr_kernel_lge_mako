@@ -414,7 +414,7 @@ static inline void list_del_leaf_cfs_rq(struct cfs_rq *cfs_rq)
 static inline int
 is_same_group(struct sched_entity *se, struct sched_entity *pse)
 {
-	return 1;
+	return 1;/home/daniel/tesla-7.1/out/target/product/mako/boot.img
 }
 
 static inline struct sched_entity *parent_entity(struct sched_entity *se)
@@ -1484,18 +1484,6 @@ static void check_spread(struct cfs_rq *cfs_rq, struct sched_entity *se)
 	if (d > 3*sysctl_sched_latency)
 		schedstat_inc(cfs_rq, nr_spread_over);
 #endif
-}
-
-static unsigned int Lgentle_fair_sleepers = 0;
-static unsigned int Larch_power = 1;
-void relay_gfs(unsigned int gfs)
-{
-	Lgentle_fair_sleepers = gfs;
-}
-
-void relay_ap(unsigned int ap)
-{
-	Larch_power = ap;
 }
 
 static void
@@ -2860,7 +2848,7 @@ static void task_waking_fair(struct task_struct *p)
  * shares distribution (s_i):
  *
  *   rw_i = {   2,   4,   1,   0 }
- *   s_i  = { 2/7, 4/7, 1/7,   0 }
+ *   s_i  = { 2/7, 4/7, 1/7,   0 }/home/daniel/tesla-7.1/out/target/product/mako/boot.img
  *
  * As per wake_affine() we're interested in the load of two CPUs (the CPU the
  * task used to run on and the CPU the waker is running on), we need to
@@ -3285,7 +3273,7 @@ migrate_task_rq_fair(struct task_struct *p, int next_cpu)
 
 	/*
 	 * Load tracking: accumulate removed load so that it can be processed
-	 * when we next update owning cfs_rq under rq->lock.  Tasks contribute
+	 * when we next update owning cfs_rq under rq->lock.  Tasks contrib/home/daniel/tesla-7.1/out/target/product/mako/boot.imgute
 	 * to blocked load iff they have a positive decay-count.  It can never
 	 * be negative here since on-rq tasks have decay-count == 0.
 	 */
@@ -3815,7 +3803,7 @@ int can_migrate_task(struct task_struct *p, struct lb_env *env)
 
 	if (tsk_cache_hot) {
 		schedstat_inc(p, se.statistics.nr_failed_migrations_hot);
-		return 0;
+		return 0;/home/daniel/tesla-7.1/out/target/product/mako/boot.img
 	}
 	return 1;
 }
@@ -3877,7 +3865,7 @@ static int move_tasks(struct lb_env *env)
 		/* We've more or less seen every task there is, call it quits */
 		if (env->loop > env->loop_max)
 			break;
-
+/home/daniel/tesla-7.1/out/target/product/mako/boot.img
 		/* take a breather every nr_migrate tasks */
 		if (env->loop > env->loop_break) {
 			env->loop_break += sched_nr_migrate_break;
@@ -4140,7 +4128,7 @@ unsigned long default_scale_smt_power(struct sched_domain *sd, int cpu)
 {
 	unsigned long weight = sd->span_weight;
 	unsigned long smt_gain = sd->smt_gain;
-
+/home/daniel/tesla-7.1/out/target/product/mako/boot.img
 	smt_gain /= weight;
 
 	return smt_gain;
@@ -4187,7 +4175,7 @@ static void update_cpu_power(struct sched_domain *sd, int cpu)
 	struct sched_group *sdg = sd->groups;
 
 	if ((sd->flags & SD_SHARE_CPUPOWER) && weight > 1) {
-		if (Larch_power)
+			if (sched_feat(ARCH_POWER))
 			power *= arch_scale_smt_power(sd, cpu);
 		else
 			power *= default_scale_smt_power(sd, cpu);
@@ -4197,10 +4185,10 @@ static void update_cpu_power(struct sched_domain *sd, int cpu)
 
 	sdg->sgp->power_orig = power;
 
-	if (Larch_power)
+	if (sched_feat(ARCH_POWER))
 		power *= arch_scale_freq_power(sd, cpu);
 	else
-		power *= default_scale_freq_power(sd, cpu);
+		power *= default_scale_freq_po/home/daniel/tesla-7.1/out/target/product/mako/boot.imgwer(sd, cpu);
 
 	power >>= SCHED_POWER_SHIFT;
 
