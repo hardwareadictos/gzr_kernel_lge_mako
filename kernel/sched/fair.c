@@ -414,7 +414,7 @@ static inline void list_del_leaf_cfs_rq(struct cfs_rq *cfs_rq)
 static inline int
 is_same_group(struct sched_entity *se, struct sched_entity *pse)
 {
-	return 1;/home/daniel/tesla-7.1/out/target/product/mako/boot.img
+	return 1;
 }
 
 static inline struct sched_entity *parent_entity(struct sched_entity *se)
@@ -1171,7 +1171,6 @@ static inline void __update_group_entity_contrib(struct sched_entity *se)
 	int runnable_avg;
 
 	u64 contrib;
-
 	contrib = cfs_rq->tg_load_contrib * tg->shares;
 	se->avg.load_avg_contrib = div64_u64(contrib,
 					     atomic64_read(&tg->load_avg) + 1);
@@ -1508,8 +1507,7 @@ place_entity(struct cfs_rq *cfs_rq, struct sched_entity *se, int initial)
 		 * Halve their sleep time's effect, to allow
 		 * for a gentler effect of sleepers:
 		 */
-		if (Lgentle_fair_sleepers)
-			thresh >>= 1;
+		
 
 		vruntime -= thresh;
 	}
@@ -2848,7 +2846,7 @@ static void task_waking_fair(struct task_struct *p)
  * shares distribution (s_i):
  *
  *   rw_i = {   2,   4,   1,   0 }
- *   s_i  = { 2/7, 4/7, 1/7,   0 }/home/daniel/tesla-7.1/out/target/product/mako/boot.img
+ *   s_i  = { 2/7, 4/7, 1/7,   0 }
  *
  * As per wake_affine() we're interested in the load of two CPUs (the CPU the
  * task used to run on and the CPU the waker is running on), we need to
@@ -3273,7 +3271,7 @@ migrate_task_rq_fair(struct task_struct *p, int next_cpu)
 
 	/*
 	 * Load tracking: accumulate removed load so that it can be processed
-	 * when we next update owning cfs_rq under rq->lock.  Tasks contrib/home/daniel/tesla-7.1/out/target/product/mako/boot.imgute
+	 * when we next update owning cfs_rq under rq->lock.  Tasks contribute
 	 * to blocked load iff they have a positive decay-count.  It can never
 	 * be negative here since on-rq tasks have decay-count == 0.
 	 */
@@ -3803,7 +3801,7 @@ int can_migrate_task(struct task_struct *p, struct lb_env *env)
 
 	if (tsk_cache_hot) {
 		schedstat_inc(p, se.statistics.nr_failed_migrations_hot);
-		return 0;/home/daniel/tesla-7.1/out/target/product/mako/boot.img
+		return 0;
 	}
 	return 1;
 }
@@ -3865,7 +3863,6 @@ static int move_tasks(struct lb_env *env)
 		/* We've more or less seen every task there is, call it quits */
 		if (env->loop > env->loop_max)
 			break;
-/home/daniel/tesla-7.1/out/target/product/mako/boot.img
 		/* take a breather every nr_migrate tasks */
 		if (env->loop > env->loop_break) {
 			env->loop_break += sched_nr_migrate_break;
@@ -4128,7 +4125,6 @@ unsigned long default_scale_smt_power(struct sched_domain *sd, int cpu)
 {
 	unsigned long weight = sd->span_weight;
 	unsigned long smt_gain = sd->smt_gain;
-/home/daniel/tesla-7.1/out/target/product/mako/boot.img
 	smt_gain /= weight;
 
 	return smt_gain;
@@ -4188,7 +4184,7 @@ static void update_cpu_power(struct sched_domain *sd, int cpu)
 	if (sched_feat(ARCH_POWER))
 		power *= arch_scale_freq_power(sd, cpu);
 	else
-		power *= default_scale_freq_po/home/daniel/tesla-7.1/out/target/product/mako/boot.imgwer(sd, cpu);
+		power *= default_scale_freq_power(sd, cpu);
 
 	power >>= SCHED_POWER_SHIFT;
 
