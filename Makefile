@@ -197,7 +197,7 @@ CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
 
 # Architecture as present in compile.h
 UTS_MACHINE 	:= $(ARCH)
-SRCARCH 	:= $(ARCH)
+SRCARCH 	:= ${CCACHE} /opt/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
 
 # Additional ARCH settings for x86
 ifeq ($(ARCH),i386)
