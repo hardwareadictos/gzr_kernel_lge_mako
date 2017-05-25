@@ -193,11 +193,12 @@ SUBARCH := $(shell uname -m | sed -e s/i.86/i386/ -e s/sun4u/sparc64/ \
 # Note: Some architectures assign CROSS_COMPILE in their arch/*/Makefile
 export KBUILD_BUILDHOST := $(SUBARCH)
 ARCH		?= arm
-CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
+CROSS_COMPILE	?= ${CACHE} /opt/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
+
 
 # Architecture as present in compile.h
 UTS_MACHINE 	:= $(ARCH)
-SRCARCH 	:= ${CCACHE} /opt/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
+SRCARCH 	:= $(ARCH)
 
 # Additional ARCH settings for x86
 ifeq ($(ARCH),i386)
